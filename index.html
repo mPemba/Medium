@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Medium Mike Slayer</title>
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+  </head>
+  <body>
+    <header class="nav">
+    	<div class="nav_left">
+    	  <span>
+    	    <h1 class="logoM">M</h1>
+    	  </span>
+    	</div>
+    	<div class="nav_center">
+    	  <h3>
+    	    <span class="nav_center_text_top">PUBLISHED IN</span>
+    	    REACT TUTORIALS
+    	  </h3>
+        </div>
+        <div class="button signIn">Sign in / Sign up</div>
+        <div class="button search"><i class="fa fa-search"></i></div>
+    </header>
+    <div>
+        <img class="main_image" src="https://d262ilb51hltx0.cloudfront.net/max/2000/1*bs9PbxDndAW7mmqve3EQ-w.jpeg"/>
+    </div>
+
+    <div class="content">
+
+      <h1 class="h1_reactProperties">React Properties</h1>
+        <p class="main_text">Last time we looked at components, which are the building blocks of any React-powered interface. Today we will continue to explore them, with a focus on how to customise them.</p>
+        <p class="main_text">There are a few ways in which React components can be customised, but we’re going pay particular attention to properties. Properties are to React components what attributes are to HTML elements. In fact, their most basic use is in the form of attributes, in JSX.</p>
+
+        <div class="link">
+          <p class="main_text_link">You can find the accompanying source-code, for this tutorial, at: https://github.com/formativ/tutorial-react-properties.</p>
+          <p class="main_text_link">Please post any errors you find, or questions you have as comments on this article or as issues on GitHub.</p>
+          <p class="main_text_link">Thanks to Christoph Pojer and Paul O’Shannessy for helping to improve this!</p>
+        </div>
+
+        <h2 class="sub_category_h">Defining Properties</h2>
+          <p class="main_text">If you’re familiar with HTML (and you really should be for this tutorial to make sense) then you know that HTML elements can be customised by the attribute values contained in the opening tag.</p>
+          <p class="main_text">Given a simple component:</p>
+
+        <div class="example">
+            <p>
+              <pre name="96c7" class="graf--pre"><a id="96c7"></a>/**<br> * @jsx React.DOM<br> */<br>  <br>var InterfaceComponent = React.createClass({<br>  render&nbsp;: function() {<br>    return &lt;div&gt;hello world!&lt;/div&gt;;<br>  }<br>});<br><br>React.renderComponent(<br>  &lt;InterfaceComponent /&gt;,<br>  document.body<br>);</pre>
+            </p>
+        </div>
+
+        <p class="main_text">We can change the behaviour of this component by altering the contents of the render() method. What if we wanted the behaviour to changed, based on external information? We can use properties!</p>
+
+        <div class="example">
+            <p>
+              <pre name="4e46" class="graf--pre"><a id="4e46"></a>/**<br> * @jsx React.DOM<br> */<br>  <br>var InterfaceComponent = React.createClass({<br>  render&nbsp;: function() {<br>    return &lt;div&gt;hello {this.props.name}!&lt;/div&gt;;<br>  }<br>});<br><br>React.renderComponent(<br>  &lt;InterfaceComponent name="chris" /&gt;,<br>  document.body<br>);</pre>
+            </p>
+        </div>
+        <p class="main_text">I wasn’t kidding when I said that properties were like attributes. In JSX they can be defined as attributes. Let’s break this example down:</p>
+        <div class="example">
+            <p>
+              <pre name="bd12" class="graf--pre"><a id="bd12"></a>React.renderComponent(<br>  &lt;InterfaceComponent name="chris" /&gt;,<br>  document.body<br>);</pre>
+            </p>
+        </div>
+        <p class="main_text">When we provide a name attribute (and value) this gets passed along to the component. If you come from a history of Object Oriented Programming languages, you may thing that these properties are passed to a constructor and that you need to manage them from there. Don’t fall into this trap!
+        </p>
+        <p class="main_text">They are actually passed to a constructor, but you should never try to override this behaviour with your own constructor functionality. You should only use these values from this.props:
+        </p>
+        <div class="example">
+            <p>
+              <pre name="8113" class="graf--pre"><a id="8113"></a>var InterfaceComponent = React.createClass({<br>  render&nbsp;: function() {<br>    return &lt;div&gt;hello {this.props.name}!&lt;/div&gt;;<br>  }<br>});</pre>
+            </p>
+        </div>
+        <p class="main_text">You may be wondering what the curly braces are for. They drop out of the HTML-like syntax into JavaScript evaluation mode. We’ll see how that can be used to great effect in future tutorials, but what’s important for now is that defined properties can be accessed via this.props.
+        </p>
+
+        <div class="link">
+          <p class="main_text_link">You can also define hyphen-separated property names. You will have to use array access to pull them out of this.props though.</p>
+        </div>
+    <h2 class="sub_category_h">Supported Elements</h2>
+        <p class="main_text">So far we’ve used div, span and our own components. It’s helpful to know which HTML elements have been implemented as React components (and are therefore instantiable with JSX element syntax).</p>
+
+        <p class="main_text">Here’s a list of supported HTML elements:
+        </p>
+
+        <div class="example">
+            <p>
+              a abbr address area article aside audio b base bdi bdo big blockquote body br button canvas caption cite code col colgroup data datalist dd del details dfn div dl dt em embed fieldset figcaption figure footer form h1 h2 h3 h4 h5 h6 head header hr html i iframe img input ins kbd keygen label legend li link main map mark menu menuitem meta meter nav noscript object ol optgroup option output p param pre progress q rp rt ruby s samp script section select small source span strong style sub summary sup table tbody td textarea tfoot th thead time title tr track u ul var video wbr
+            </p>
+        </div>
+    <h2 class="sub_category_h">Supported Attributes</h2>
+        <p class="main_text">As you might expect, most of the attributes that can be found in regular HTML are supported in JSX:
+        </p>
+
+        <div class="example">
+            <p>
+            accept accessKey action allowFullScreen allowTransparency alt autoCapitalize autoComplete autoFocus autoPlay cellPadding cellSpacing charSet checked className colSpan content contentEditable contextMenu controls data dateTime dir disabled draggable encType form frameBorder height hidden href htmlFor httpEquiv icon id label lang list loop max maxLength method min multiple name pattern placeholder poster preload radioGroup readOnly rel required role rowSpan scrollLeft scrollTop selected size spellCheck src step style tabIndex target title type value width wmode
+            </p>
+        </div>
+        <p class="main_text">You may notice, from this list, that attributes usually specified in hyphen-case (HTML) are supported in camelCase (JSX). That’s not to say that you can only use camelCase for your own attributes. It’s simply a design decision which allows for this.props.* access.
+        </p>
+        <p class="main_text">There are a few exceptions to the way HTML attributes usually work (other than the case difference we’ve already covered):
+        </p>
+        <ol class="main_text">
+          <li>The style attribute doesn’t accept strings. You can specify a JavaScript object with keys that correspond to the camelCase CSS property names. We’ll see an example of this shortly.</li>
+          <li>Events can be assigned (following the W3C specification) using attributes like onClick and onChange.</li>
+          <li>the onChange event is triggered when the element’s value changes. This differs from some browsers which need the element to blur before onChange is triggered.</li>
+        </ol>
+        <p class="main_text">There are other differences, but we’ll look at them as we continue in the series.
+        </p>
+
+        <div class="link">
+          <p class="main_text_link">You can find out more support details at: http://facebook.github.io/react/docs/tags-and-attributes.html.</p>
+        </div>
+    <h2 class="sub_category_h">Validating MIKE SLAYER</h2>
+        <p class="main_text">There’s a handy property you can set (on new component definitions) which will allow you to control the presence and/or type of properties:</p>
+
+        <div class="example">
+            <p><pre name="da74" class="graf--pre"><a id="da74"></a>/**<br> * @jsx React.DOM<br> */<br>  <br>var InterfaceComponent = React.createClass({<br>  propTypes: {<br>    name   &nbsp;: React.PropTypes.string,<br>    visible&nbsp;: React.PropTypes.bool.isRequired,<br>    before &nbsp;: function(props, propName, componentName) {<br>      if (!(propName in props)) {<br>        throw new Error("before must be set.");<br>      }<br><br>      var now = new Date();<br><br>      if (now.getTime() &gt;= props[propName].getTime()) {<br>        throw new Error("before must be set to a later date.");<br>      }<br>    }<br>  },<br>  render&nbsp;: function() {<br>    return &lt;div&gt;hello {this.props.name}!&lt;/div&gt;;<br>  }<br>});<br><br>React.renderComponent(<br>  &lt;InterfaceComponent<br>    name="chris"<br>    visible={true}<br>    before={new Date(Date.now() + 1000)} /&gt;,<br>  document.body<br>);</pre>
+            </p>
+        </div>
+
+        <p class="main_text">
+            You can validate the type of properties by providing any of the types in React.PropTypes.*. To make a property required, append .isRequired to the type. You can also define a callback function in which you perform specific validation against the provided properties. In this cause I check that the before property is provided and that it is a date beyond the current date/time.
+        </p>
+
+        <div class="link">
+          <p class="main_text_link">You can also use React.PropTypes.instanceOf(SomeClass) to compare a property against a defined class, but you shouldn’t need to use this as much as the standard data types and callback functions. You can find out more about property type validation at: http://facebook.github.io/react/docs/reusabl.components.html.
+          </p>
+        </div>
+    <h2 class="sub_category_h">Setting Property Defaults</h2>
+        <p class="main_text">Let’s look at how to set default property values, that can be overridden by properties passed in initialisation:</p>
+
+        <div class="example">
+          <p>
+            <pre name="4ba0" class="graf--pre"><a id="4ba0"></a>/**<br> * @jsx React.DOM<br> */<br>  <br>var InterfaceComponent = React.createClass({<br>  getDefaultProps&nbsp;: function() {<br>    return {<br>      "firstName"&nbsp;: "chris",<br>      "lastName" &nbsp;: "pitt"<br>    };<br>  },<br>  render&nbsp;: function() {<br>    return &lt;div&gt;<br>      hello {this.props.firstName + " " + this.props.lastName}<br>    &lt;/div&gt;;<br>  }<br>});<br><br>React.renderComponent(<br>  &lt;InterfaceComponent /&gt;,<br>  document.body<br>);</pre>
+          </p>
+        </div>
+        <p class="main_text">The getDefaultProps() method must return an object. The contents of that object are up to you, but they will get overwritten by properties provided in initialisation.
+        </p>
+
+        <div class="link">
+          <p class="main_text_link">You can find out more about default properties at: http://facebook.github.io/react/docs/component-specs.html#getdefaultprops.
+          </p>
+        </div>
+    <h2 class="sub_category_h">Transferring Properties</h2>
+        <p class="main_text">When you are working with multiple components, in a hierarchy, there may be occasion for sending properties down the structural tree. This has the benefit of reducing code duplication…</p>
+
+        <div class="example">
+          <p>
+            <pre name="af0f" class="graf--pre"><a id="af0f"></a>/**<br> * @jsx React.DOM<br> */<br><br>var ChildComponent = React.createClass({<br>  render&nbsp;: function() {<br>    return &lt;div style={{<br>      color     &nbsp;: this.props.color,<br>      background&nbsp;: this.props.background<br>    }}&gt;<br>      I am {this.props.color}<br>    &lt;/div&gt;<br>  }<br>});<br>  <br>var ParentComponent = React.createClass({<br>  render&nbsp;: function() {<br>    return this.transferPropsTo(<br>      &lt;ChildComponent background={null} /&gt;<br>    );<br>  }<br>});<br><br>React.renderComponent(<br>  &lt;ParentComponent color="blue" background="red" /&gt;,<br>  document.body<br>);</pre>
+          </p>
+        </div>
+
+        <p class="main_text">
+          In this example we can see how the transferPropsTo() method will pass all the properties of a parent component to a child component. That is unless we explicitly set the value of a child component’s property, as we did for background.
+        </p>
+
+        <div class="link">
+          <p class="main_text_link">
+            Be careful when using this approach to passing properties around. You may inadvertently create a dependency between your parent and child components. It’s usually better just to explicit pass properties when instantiating child components.
+          </p>
+        </div>
+
+    <h2 class="sub_category_h">Conclusion</h2>
+        <p class="main_text">Properties are what turn dull components into configurable interface elements. They are key to component reuse and help immensely with nested component design. We’ve seen most of how properties can be used, but there’s still loads more to components. Keep reading.
+        </p>
+
+        <p class="main_text">If you enjoyed this tutorial; it would be helpful if you could click the Recommend button and share it with other developers.
+        </p>
+    </div>
+
+    <footer class="foot">
+        <div class="button recommend"><i class="fa fa-heart-o"></i> Recommend</div>
+        <div class="button bookmark"><i class="fa fa-bookmark-o"></i></div>
+        <div class="button share"><i class="fa fa-share-square-o"></i></div>
+        <div class="button angle_down"><i class="fa fa-angle-down"></i></div>
+    </footer>
+  </body>
+
+</html>
